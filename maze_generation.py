@@ -1,5 +1,4 @@
 import random
-import sys
 
 # treat maze as matrix
 # TODO: add more dead ends
