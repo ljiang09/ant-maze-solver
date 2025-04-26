@@ -35,7 +35,7 @@ def ACO(num_ants, num_iterations, maze, exits, pheromone_strength=1.0, evaporati
             # only add pheromones if ant reaches the end
             # this is so that we only reinforce successful paths, find best path
             if path and path[-1] == end:
-                state.add_pheromone(pheromone_layer, path, pheromone_strength) # TODO: determine pheromone value. could be a tunable param
+                state.add_pheromone(pheromone_layer, path, pheromone_strength)
     
             if best_path is None or len(path) < len(best_path):
                     best_path = path
