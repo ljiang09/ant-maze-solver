@@ -13,19 +13,25 @@
 
 # potential steps:
 # make the ant die after a certain number of moves (perhaps a boolean feature flag)
-from maze_generation import generate_maze
+from maze_generation import generate_maze, print_maze
 from ACO import ACO
+
 #1) generate maze
-maze = generate_maze(10,10,2)
-start_idx = (0,0) # TODO: add code to find start idx from maze gen
-end_idx = 0 #TODO: add code to find end idx from maze gen
+exits, maze = generate_maze(10,10,2)
+start_idx = exits[0]
+end_idx = exits[1]
 
 #2) establish number of ants and iterations
 num_ants = 10
 num_iterations = 100
 
 # 3) run ACO algorithm on maze
-best_path = ACO(num_ants, num_iterations, maze, start_idx, end_idx)
+best_path, pheromone_layer = ACO(num_ants, num_iterations, maze, start_idx, end_idx)
 print("Best path found by ants:", best_path)
 
 # 4) visualize maze and path
+print_maze(f"Original Maze:{maze}")
+
+print("*********************************************")
+
+print(f"Path found: {pheromone_layer}")

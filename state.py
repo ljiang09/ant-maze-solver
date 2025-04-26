@@ -54,7 +54,8 @@ def evaporate_pheromone(pheromone_layer, evaporation_rate):
     Returns:
         pheromone_layer (list): 2D list representing the updated pheromone layer
     '''
-    # for every cell in layer, reduces value by evaporation rate
-    #TODO: does it take into account walls?
-    pheromone_layer = [[cell * (1 - evaporation_rate) for cell in row] for row in pheromone_layer]
-    return pheromone_layer
+    # for every path cell in layer, reduces value by evaporation rate
+    for row in range(len(pheromone_layer)):
+        for col in range(len(pheromone_layer[0])):
+            if pheromone_layer[row][col] != -1:
+                pheromone_layer[row][col] *= (1 - evaporation_rate)

@@ -17,7 +17,9 @@ def generate_maze(rows, cols, num_exits=2):
                          must be more than 2 for a maze to actually work
                 
     Returns:
-        A 2D list representing the maze, where -1 indicates a wall and 0 indicates a valid path
+        exits (set): A set of tuples representing the coordinates of the exits
+        maze (list): A 2D list representing the maze, where -1 indicates a wall
+                     and 0 indicates a valid path
     '''
     maze = [[-1 for _ in range(cols)] for _ in range(rows)]
 
