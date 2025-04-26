@@ -17,7 +17,10 @@ def generate_maze(rows, cols, num_exits=2):
                          must be more than 2 for a maze to actually work
                 
     Returns:
-        A 2D list representing the maze, where -1 indicates a wall and 0 indicates a valid path
+        A tuple containing:
+        - exits: A list of tuples representing the coordinates of the exits
+        - maze: A 2D list representing the maze, where -1 indicates a wall
+            and 0 indicates a valid path
     '''
     maze = [[-1 for _ in range(cols)] for _ in range(rows)]
 
@@ -57,7 +60,7 @@ def generate_maze(rows, cols, num_exits=2):
             maze[x][y] = 0
             exits.add((x, y))
 
-    return exits, maze
+    return list(exits), maze
 
 def print_maze(maze):
     BLACK = "\033[1;30m"
@@ -69,7 +72,7 @@ def print_maze(maze):
             if cell == -1:
                 line += f"{BLACK} .{RESET} "
             else:
-                line += f"{RED}{cell:>2}{RESET} "
+                line += f"{RED}{str(cell*10)[:2]:>2}{RESET} "
         print(line)
 
-print_maze(generate_maze(50, 50, 3))
+# print_maze(generate_maze(50, 50, 3)[1])
