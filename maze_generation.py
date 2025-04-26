@@ -1,3 +1,7 @@
+'''
+This file contains functions related to the maze generation and view. Note that since maze generation
+was not the goal of this project, we are using code that is not ours.
+'''
 import random
 
 # treat maze as matrix

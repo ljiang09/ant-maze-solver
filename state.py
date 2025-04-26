@@ -1,6 +1,7 @@
-from maze_generation import generate_maze
+'''This file contains functions related to the pheromonal state of the map.'''
+import copy
 
-def generate_pheromone_layer(rows, cols, num_exits=2):
+def generate_pheromone_layer(maze):
     '''
     Generates a pheromone layer for the maze.
 
@@ -11,66 +12,49 @@ def generate_pheromone_layer(rows, cols, num_exits=2):
     represents the amount of pheromone present.
 
     Args:
-        rows (int): Number of rows in the maze.
-        cols (int): Number of columns in the maze.
-        num_exits (int): Number of exits to create in the maze.
-            Must be more than 2 for a maze to actually work.
+        maze (list): 2D list of ints representing the maze, where -1 indicates
+        a wall and 0 indicates a valid path.
 
     Returns:
-        A 2D list of ints representing the maze, where -1 indicates
-        a wall and 0 indicates a valid path.
+        pheromone_layer (list): 2D list of floats representing the pheromone layer,
+        where -1 indicates a wall and 0 indicates a valid path.
     '''
-    return generate_maze(rows, cols, num_exits)
+    pheromone_layer = copy.deepcopy(maze)
+    return pheromone_layer
 
-def add_pheromone(row, col, value, pheromone_layer):
+def add_pheromone(pheromone_layer, path, value):
     '''
-    Adds pheromone(s) onto cell of maze in the pheromone layer.
+    Adds pheromones onto cell of maze in the pheromone layer,
+    given a value. The amount of pheromone is also divided by the
+    length of the path, so that the pheromone is evenly distributed. 
 
     Args:
-        row (int): row index of the cell
-        col (int): column index of the cell
+        pheromone_layer (list): 2D list representing the pheromone layer
+        path (list): list of tuples representing the path taken by an ant
         value (float): amount of pheromone to add
     '''
     # indexes the cell in the layer and edits value
-    pheromone_layer[row][col] += value
+    for cell in path:
+        row, col = cell
 
-def evaporate_pheromone():
+        # add pheromones to path
+        if pheromone_layer[row][col] != -1: 
+            pheromone_layer[row][col] += value / len(path)
+
+
+def evaporate_pheromone(pheromone_layer, evaporation_rate):
     '''
-    Evaporates pheromone in the pheromone layer.
+    Evenly evaporates pheromone in the pheromone layer at the end of
+    each ant iteration, based on an evaporation rate.
 
     Args:
         pheromone_layer (list): 2D list representing the pheromone layer
         evaporation_rate (float): rate at which pheromone evaporates
-    '''
-    pass
-
-def ant_path():
-    '''
-    Returns the path taken by the ant. Is represented as a copy of the maze,
-    with 1s representing where the ant has been, and 0s being where the ant has not gone.
-
-    Args:
-        ant (Ant): Ant object # IDK IF I WANT THIS?
-    '''
-    pass
-
-# Heuristic?
-
-def heuristic(pheromone_layer, row, col):
-    '''
-    The heuristic function used to calculate the desirability of a cell.
-    Acts as a probability that an ant will choose a certain cell.
-
-    Args:
-        pheromone_layer (list): 2D list representing the pheromone layer
-        row (int): row index of the cell to calculate
-        col (int): column index of the cell to calculate
 
     Returns:
-        float: probability of choosing the cell
+        pheromone_layer (list): 2D list representing the updated pheromone layer
     '''
-    pass
-
-def update_probability():
-    # this might be the same thing as heuristic func above. 
-    pass
+    # for every cell in layer, reduces value by evaporation rate
+    #TODO: does it take into account walls?
+    pheromone_layer = [[cell * (1 - evaporation_rate) for cell in row] for row in pheromone_layer]
+    return pheromone_layer
