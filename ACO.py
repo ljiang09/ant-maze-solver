@@ -30,7 +30,7 @@ def ACO(num_ants, num_iterations, maze, exits, pheromone_strength=1.0, evaporati
 
     for _ in range(num_iterations):
         for _ in range(num_ants):
-            path = ants.simulate_ant(maze, pheromone_layer, start)
+            path = ants.simulate_ant(maze, pheromone_layer, start, end, max_steps=100)
 
             # only add pheromones if ant reaches the end
             # this is so that we only reinforce successful paths, find best path
