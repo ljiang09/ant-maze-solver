@@ -53,7 +53,7 @@ def generate_maze(rows, cols, num_exits=2):
             maze[x][y] = 0
             exits.add((x, y))
 
-    return maze
+    return exits, maze
 
 def print_maze(maze):
     BLACK = "\033[1;30m"
