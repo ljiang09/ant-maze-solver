@@ -89,4 +89,23 @@ def print_maze(maze):
         print(line)
 
 
-# print_maze(generate_maze(50, 50, 3)[1])
+def print_maze_with_path(maze, best_path):
+    """ """
+    BLACK = "\033[1;30m"
+    RED = "\033[91m"
+    RESET = "\033[0m"
+
+    if not best_path:
+        print("No path found. Try increasing the num iterations or num ants.")
+        return
+
+    for r, row in enumerate(maze):
+        line = ""
+        for c, cell in enumerate(row):
+            if cell == -1:
+                line += f"{BLACK} .{RESET} "
+            elif (r, c) in best_path:
+                line += f"{RED} 0{RESET} "
+            else:
+                line += " 0 "
+        print(line)

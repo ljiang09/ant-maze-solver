@@ -1,18 +1,19 @@
-'''This file contains the functions related to ant movement and choices in the maze.'''
+"""This file contains the functions related to ant movement and choices in the maze."""
+
 import random
 
 
 def find_probability(pheromone_layer, neighbors):
-    '''
+    """
     Finds the probability of moving to each neighboring cell based on pheromone levels.
-    
+
     Args:
         pheromone_layer (list of list of float): Current pheromone grid.
         neighbors (list of (row, col)): Valid next positions.
-    
+
     Returns:
         (row, col): Chosen next move.
-    '''
+    """
     # reads pheromones of neighboring cells
     pheromones = [pheromone_layer[r][c] + 1e-6 for r, c in neighbors]
 
@@ -25,7 +26,7 @@ def find_probability(pheromone_layer, neighbors):
 
 
 def get_neighbors(maze, position):
-    '''
+    """
     Finds the neighboring cells of a given position in the maze.
 
     Args:
@@ -36,10 +37,10 @@ def get_neighbors(maze, position):
     Returns:
         neighbors (list): A list of tuples representing the coordinates of the
         neighboring cells that are not walls.
-    '''
+    """
     # getting row/col
     row, col = position
-    directions = [(-1,0), (1,0), (0,-1), (0,1)]
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     neighbors = []
 
     # finding new positions based on direction
@@ -52,8 +53,9 @@ def get_neighbors(maze, position):
                 neighbors.append((new_r, new_c))
     return neighbors
 
+
 def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
-    '''
+    """
     Simulates the ant finding the path in the maze. Does not backtrack. If the ant
     reaches a dead end, or max number of steps, then simulation ends.
 
@@ -68,8 +70,9 @@ def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
 
     Returns:
         path (list): A list of tuples representing the path taken by the ant.
-        If the ant can't reach the end, the path will be incomplete.
-    '''
+        If the ant can't reach the end, the path will be incomplete and None
+        will be returned.+-
+    """
     curr_position = start
     path = [curr_position]
 
@@ -78,8 +81,10 @@ def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
         if curr_position == end:
             break
         neighbors = get_neighbors(maze, curr_position)
-        if not neighbors: # if no neighbors
-            break
+        if not neighbors or (
+            len(neighbors) == 1 and neighbors[0] in path
+        ):  # if no neighbors
+            return None
 
         # finds probs of moving to a cell, and chooses next move
         probabilities = find_probability(pheromone_layer, neighbors)

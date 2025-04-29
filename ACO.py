@@ -45,8 +45,11 @@ def ACO(
             if path and path[-1] == end:
                 state.add_pheromone(pheromone_layer, path, pheromone_strength)
 
-            if best_path is None or len(path) < len(best_path):
-                best_path = path
+            if path:
+                if not best_path or len(path) < len(best_path):
+                    best_path = path
+
+            # print(f"Ant: this is my path!{path}")
 
         state.evaporate_pheromone(pheromone_layer, evaporation_rate)
 
