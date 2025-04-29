@@ -90,7 +90,17 @@ def print_maze(maze):
 
 
 def print_maze_with_path(maze, best_path):
-    """ """
+    """
+    Prints a visual of the maze in terminal, with the best path highlighted.
+    Maze paths are represented with a `0`, and maze walls are represented with a `.`.
+    The best path is represented with a `0` in red.
+
+    Args:
+        maze (list): 2D list of ints representing the maze, where -1 indicates
+                     a wall and any other value indicates a valid path.
+        best_path (list): A list of tuples representing the coordinates of the
+                          best path in the maze.
+    """
     BLACK = "\033[1;30m"
     RED = "\033[91m"
     RESET = "\033[0m"
