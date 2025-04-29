@@ -7,7 +7,7 @@ code that is not ours.
 import random
 
 
-def generate_maze(rows, cols, num_exits=2):
+def generate_maze(rows, cols, num_exits=1):
     """
     Randomly generates a maze of a specified size and with the specified number of exits.
     The maze is treated as a matrix of cells, where -1 indicates a wall and 0 indicates
@@ -17,7 +17,7 @@ def generate_maze(rows, cols, num_exits=2):
         rows (int): Number of rows in the maze
         cols (int): Number of columns in the maze
         num_exits (int): Number of exits to create in the maze,
-                         must be more than 2 for a maze to actually work
+                         must be 1 or more for a maze to actually work
 
     Returns:
         A tuple containing:
@@ -27,7 +27,7 @@ def generate_maze(rows, cols, num_exits=2):
     """
     maze = [[-1 for _ in range(cols)] for _ in range(rows)]
 
-    start_row, start_col = random.randint(1, rows - 2), random.randint(1, cols - 2)
+    start_row, start_col = 1, 0
     maze[start_row][start_col] = 0
 
     def carve(x, y):
@@ -40,20 +40,21 @@ def generate_maze(rows, cols, num_exits=2):
                     maze[x + dx][y + dy] = 0
                     maze[nx][ny] = 0
                     carve(nx, ny)
+                else:
+                    # 20% chance improve a dead end
+                    if random.random() < 0.2:
+                        maze[x + dx][y + dy] = 0
 
     carve(start_row, start_col)
 
     # Generate exits on border
     exits = set()
-    potential_exits = []
-    for i in range(1, cols - 1):
-        potential_exits += [(0, i), (rows - 1, i)]  # top and bottom
-    for i in range(1, rows - 1):
-        potential_exits += [(i, 0), (i, cols - 1)]  # left and right
+    border = [(0, x) for x in range(cols)] + [(rows - 1, x) for x in range(cols)] + \
+        [(x, 0) for x in range(1, rows)] + [(x, cols - 1) for x in range(rows)]
 
-    random.shuffle(potential_exits)
+    random.shuffle(border)
 
-    for x, y in potential_exits:
+    for x, y in border:
         if len(exits) >= num_exits:
             break
         if (

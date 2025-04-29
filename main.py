@@ -12,7 +12,7 @@ from ACO import ACO
 
 # 1) generate maze
 MAZE_LENGTH = 15
-NUM_EXITS = 2  # for entrance and exit
+NUM_EXITS = 1  # for entrance and exit
 exits, maze = generate_maze(MAZE_LENGTH, MAZE_LENGTH, NUM_EXITS)
 
 while exits == []:

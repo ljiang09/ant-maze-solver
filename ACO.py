@@ -20,8 +20,7 @@ def ACO(
         num_iterations (int): Number of iterations to run the simulation.
         maze (list): 2D list of ints representing the maze, where -1 indicates
                      a wall and 0 indicates a valid path.
-        exits (list): List of tuples representing the coordinates of the start index
-                      and end index, respectively.
+        exits (list): List of tuples representing the coordinates of the maze exits
         pheromone_strength (float): Amount of pheromone to deposit on the path.
         evaporation_rate (float): Rate at which pheromone evaporates.
 
@@ -30,8 +29,9 @@ def ACO(
         pheromone_layer (list): 2D list of floats representing the pheromone layer.
     """
     best_path = None
-    start = exits[0]
-    end = exits[1]
+    start = [1, 0]
+    end = exits[0]
+    print(start)
 
     # create pheromone layer based on maze
     pheromone_layer = state.generate_pheromone_layer(maze)
