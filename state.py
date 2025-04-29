@@ -15,11 +15,11 @@ def generate_pheromone_layer(maze):
 
     Args:
         maze (list): 2D list of ints representing the maze, where -1 indicates
-        a wall and 0 indicates a valid path.
+                     a wall and 0 indicates a valid path.
 
     Returns:
         pheromone_layer (list): 2D list of floats representing the pheromone layer,
-        where -1 indicates a wall and 0 indicates a valid path.
+                                where -1 indicates a wall and 0 indicates a valid path.
     """
     pheromone_layer = copy.deepcopy(maze)
     return pheromone_layer
@@ -53,9 +53,6 @@ def evaporate_pheromone(pheromone_layer, evaporation_rate):
     Args:
         pheromone_layer (list): 2D list representing the pheromone layer
         evaporation_rate (float): rate at which pheromone evaporates
-
-    Returns:
-        pheromone_layer (list): 2D list representing the updated pheromone layer
     """
     # for every path cell in layer, reduces value by evaporation rate
     for row in range(len(pheromone_layer)):

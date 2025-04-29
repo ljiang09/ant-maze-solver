@@ -12,7 +12,7 @@ def find_probability(pheromone_layer, neighbors):
         neighbors (list of (row, col)): Valid next positions.
 
     Returns:
-        (row, col): Chosen next move.
+        probabilities (list of float): Probabilities of moving to each neighboring cell.
     """
     # reads pheromones of neighboring cells
     pheromones = [pheromone_layer[r][c] + 1e-6 for r, c in neighbors]
@@ -31,12 +31,12 @@ def get_neighbors(maze, position):
 
     Args:
         maze (list): 2D list of ints representing the maze, where -1 indicates
-        a wall and 0 indicates a valid path.
+                     a wall and 0 indicates a valid path.
         position (tuple): The current position in the maze (row, col).
 
     Returns:
         neighbors (list): A list of tuples representing the coordinates of the
-        neighboring cells that are not walls.
+                          neighboring cells that are not walls.
     """
     # getting row/col
     row, col = position
@@ -61,17 +61,17 @@ def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
 
     Args:
         maze (list): 2D list of ints representing the maze, where -1 indicates
-        a wall and 0 indicates a valid path.
+                     a wall and 0 indicates a valid path.
         pheromone_layer (list): 2D list of floats representing the pheromone layer,
-        where -1 indicates a wall and 0 indicates a valid path.
+                                where -1 indicates a wall and 0 indicates a valid path.
         start (tuple): Where the ant starts in the maze (row, col).
         end (tuple): Where the end cell of the maze is (row, col).
         max_steps (int): Max number of steps an ant can take.
 
     Returns:
         path (list): A list of tuples representing the path taken by the ant.
-        If the ant can't reach the end, the path will be incomplete and None
-        will be returned.+-
+                     If the ant can't reach the end, the path will be incomplete and None
+                     will be returned.
     """
     curr_position = start
     path = [curr_position]

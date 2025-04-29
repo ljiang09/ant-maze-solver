@@ -1,35 +1,45 @@
-# generate maze (which is the pheromone layer)
-# represent path by one matrix that we rewrite each time
+"""
+Ant Colony Optimization (ACO) for maze solving
 
-# ant starts at an entrance. it checks all directions, and makes a choice on where to go
-# this decision is driven by a probability function, which is based on the pheromones
-# its path is tracked as it goes along
-# the ant continues to move until it reaches the exit, reaches a dead end, or reaches the max number of steps
-# if the ant finds an exit, we drop pheromones on the path it took based on the length of path
+This is a simulation of the Ant Colony Optimization (ACO) algorithm for maze solving.
+Here, we choose a number of ants to simulate, and a number of iterations to run the simulation.
+Then we generate a maze of a certain size, and run the ACO algorithm on it. The visual
+representation of the original maze, the best path found, as well as the pheromone layer are printed.
+"""
 
-# after each ant run, we evaporate pheromones by a certain decay rate, which ensures that the strongest paths are reinforced
-# the algorithm runs for a certain number of iterations, and the best path at the end is returned
-
-
-# potential steps:
-# make the ant die after a certain number of moves (perhaps a boolean feature flag)
 from maze import generate_maze, print_maze, print_maze_with_path
 from ACO import ACO
 
 # 1) generate maze
-exits, maze = generate_maze(15, 15, 2)
-print(exits)
-# 2) establish number of ants and iterations
+MAZE_LENGTH = 15
+NUM_EXITS = 2  # for entrance and exit
+exits, maze = generate_maze(MAZE_LENGTH, MAZE_LENGTH, NUM_EXITS)
+
+# 2) establish number of ants, iterations, and other parameters
 NUM_ANTS = 100
 NUM_ITERATIONS = 100
+PHEROMONE_STRENGTH = 1.0
+EVAPORATION_RATE = 0.05
 
 # 3) run ACO algorithm on maze
 best_path, pheromone_layer = ACO(
-    NUM_ANTS, NUM_ITERATIONS, maze, exits, evaporation_rate=0.05
+    NUM_ANTS,
+    NUM_ITERATIONS,
+    maze,
+    exits,
+    pheromone_strength=PHEROMONE_STRENGTH,
+    evaporation_rate=EVAPORATION_RATE,
+)
+
+# 4) visualize maze, best path, and pheromone layer
+print(
+    f"Number of ants: {NUM_ANTS}\n Number of iterations: {NUM_ITERATIONS} \n Maze size: {MAZE_LENGTH}x{MAZE_LENGTH}"
+)
+print(
+    f"Evaporation rate: {EVAPORATION_RATE} \n Pheromone strength: {PHEROMONE_STRENGTH}\n"
 )
 print("Best path found by ants:", best_path)
 
-# 4) visualize maze and path
 print("OG maze:")
 print_maze(maze)
 print("*********************************************")
