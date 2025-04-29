@@ -284,3 +284,17 @@ and refactoring the heuristics to incorporate the reward system.
 7. Shmygelska, Alena, and Holger H Hoos. "An ant colony optimisation algorithm
    for the 2D and 3D hydrophobic polar protein folding problem." BMC
    Bioinformatics, https://pmc.ncbi.nlm.nih.gov/articles/PMC555464/.
+
+<!--
+Things to add:
+- 2 diagrams in the for "solving YOUR problem"
+- visualization of results provided in some format
+- describe what the results mean (analysis), like with performance metrics and graphs
+  - run like 10 times, see how many work
+  - runtime metrics (bc ACO is computationally expensive)
+- write more in depth about the two other applications of ACO
+- analysis of comparison with other heuristics? basically add some heuristic examples (A* and uhhh)
+- add group member names
+- add library names and installation / setup / run instructions
+- delete state_test.py
+-->
