@@ -1,10 +1,19 @@
-# Technical Exploration
+# Ant Colony Optimization for Maze Solving
 
-## Ant Colony Optimization (ACO) Algorithm
+Olin College, Advanced Algorithms, Spring 2025
+
+Madie Tong, Lily Jiang
+
+## Project Overview
+
+### Ant Colony Optimization (ACO) Algorithm
 
 ACO is a metaheuristic algorithm inspired by the behavior of ants. It is useful
 for finding a lowest cost path through a graph, as well as any other problem
 that can be reduced to this type of problem.
+
+This project applies ACO to maze solving, where the goal is to find a path from
+a starting point to an exit in a maze.
 
 ### Mechanism
 
@@ -14,16 +23,41 @@ path more often, and subsequent ants will tend to follow more pheromone-heavy
 paths. Over time, shorter paths end up acquiring more pheromones, creating a
 feedback loop to narrow in on the best path. Thus, the main strength of this
 algorithm is that it uses feedback from previous iterations to converge on a
-best path.
+best path. This mechanism is visualized in the diagram below:
+
+<img src="https://forum.1hive.org/uploads/default/original/2X/7/7448c9ae3fce8c5fcb21f2f404ebde21805adb95.jpeg" alt="ACO mechanism visualization" width="400"/>
 
 As the algorithm runs, the ants will get closer and closer to finding an optimal
 path through the maze. It is important to note that there is a level of
 randomness involved in the ant pathing, which means they won't always choose the
 path with the most pheromones. Thus, even if the optimal solution (global
 optima) has been found in a previous iteration, the best solution per iteration
-(local optima) won't necessarily be this global optimal path.
+(local optima) won't necessarily be this global optimal path. However, this
+randomization allows for more exploration of the solution space, mitigating the
+risk of converging on a suboptimal solution too quickly.
 
-### Algorithm Steps
+### Project Setup Instructions
+
+#### Libraries Used
+
+This project relies only on two built-in Python libraries: `random` and `copy`.
+If you have Python installed, you should be able to run the code.
+
+#### Setup + Run Instructions
+
+1. Clone this repository to your local machine.
+
+2. `main.py` holds the driver code for this project. To run the project, just
+   run `python main.py` (or `python3 main.py`, depending on your Python version)
+   in your terminal.
+
+3. Adjust any parameters or print statements in `main.py` to customize the
+   algorithm and output. The parameters and their effects are discussed in the
+   section below titled "Parameters and Their Effects".
+
+## Technical Exploration
+
+### ACO Algorithm Steps
 
 1. Initialize ant population.
 
@@ -66,7 +100,7 @@ ACO algorithm for maze solving:
 
 - Determines how many ants are used to explore the maze for each iteration.
 - If the number of ants is too low, the algorithm may not explore enough of the
-  maze to eventually find a path due to pheromones evaporating between
+  maze to eventually find a path due to pheromones evaporating quickly between
   iterations.
 - If the number of ants is too high, the algorithm may become overwhelmed with
   pheromones, potentially causing it to converge on a suboptimal path.
@@ -74,10 +108,10 @@ ACO algorithm for maze solving:
 **Number of iterations:**
 
 - Determines how long the algorithm runs before terminating.
-- If the algorithm is run for too short a time, it may not have enough
-  iterations to find a path at all, much less converge on a good path.
-- If the algorithm is run for too long a time, it will be a waste of time and
-  resources.
+- If the algorithm doesn't have enough iterations, it may not be able to find a
+  path at all, much less converge on a good path.
+- If the algorithm is run for too many iterations, it will be a waste of time
+  and resources.
 
 **Evaporation rate:**
 
@@ -111,13 +145,13 @@ to consider when tuning the ACO algorithm:
 
 **Maze size:**
 
-- A larger maze will generaly require more iterations to find a path, while a
-  smaller maze will generaly converge more quickly.
-- A larger maze will generaly require more ants per iteration, while a smaller
-  maze requires fewer ants.
-- Through manual testing, the max size for our maze generation code is about
-  50x50. Any larger, and the recursion depth became too much for a 2020 Macbook
-  Air to handle.
+- A larger maze will generally require more iterations to find a path, while a
+  smaller maze will generally converge more quickly.
+- A larger maze will also generally require more ants per iteration, while a
+  smaller maze requires fewer ants.
+- Note: through manual testing, the max size for our maze generation code is
+  about 50x50. Any larger, and the recursion depth became too much for a 2020
+  Macbook Air to handle.
 
 **Number of exits:**
 
@@ -128,6 +162,13 @@ to consider when tuning the ACO algorithm:
   as there is a higher likelihood of an ant's path leading to an exit.
 - A maze with a single exit may converge more quickly, as the ants will have
   fewer paths to explore.
+
+It's important to note that all of these parameters are interconnected, and
+tuning one will affect the others. For example, if the number of ants per
+iteration is increased, the evaporation rate may need to be increased to prevent
+the pheromones from overwhelming the algorithm. Algorithms like ACO require a
+lot of experimentation and parameter tuning to achieve a well-performing
+algorithm.
 
 ## Applications of ACO in other contexts
 
@@ -294,9 +335,6 @@ Things to add:
   - runtime metrics (bc ACO is computationally expensive)
 - write more in depth about the two other applications of ACO
 - analysis of comparison with other heuristics? basically add some heuristic examples (A* and uhhh)
-- add group member names
-- add library names and installation / setup / run instructions
-- delete state_test.py
 - docstring for print_maze_path()
 - make graphs to show results
 - test changing the heuristic
