@@ -297,4 +297,7 @@ Things to add:
 - add group member names
 - add library names and installation / setup / run instructions
 - delete state_test.py
+- docstring for print_maze_path()
+- make graphs to show results
+- test changing the heuristic
 -->
