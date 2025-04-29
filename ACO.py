@@ -21,6 +21,8 @@ def ACO(
         maze (list): 2D list of ints representing the maze, where -1 indicates
         a wall and 0 indicates a valid path.
         exits (list): List of tuples representing the coordinates of the start index and end index, respectively.
+        pheromone_strength (float): Amount of pheromone to deposit on the path.
+        evaporation_rate (float): Rate at which pheromone evaporates.
 
     Returns:
         best_path (list): A list of tuples representing the best path found by the ants.
