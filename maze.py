@@ -7,7 +7,7 @@ code that is not ours.
 import random
 
 
-def generate_maze(rows, cols, num_exits=1):
+def generate_maze(rows, cols, num_exits=1, complexity=0.2):
     """
     Randomly generates a maze of a specified size and with the specified number of exits.
     The maze is treated as a matrix of cells, where -1 indicates a wall and 0 indicates
@@ -41,8 +41,8 @@ def generate_maze(rows, cols, num_exits=1):
                     maze[nx][ny] = 0
                     carve(nx, ny)
                 else:
-                    # 20% chance improve a dead end
-                    if random.random() < 0.2:
+                    # random chance to interconnect the path
+                    if random.random() < complexity:
                         maze[x + dx][y + dy] = 0
 
     carve(start_row, start_col)

@@ -13,19 +13,19 @@ from ACO import ACO
 # 1) generate maze
 MAZE_LENGTH = 15
 NUM_EXITS = 1  # for entrance and exit
-exits, maze = generate_maze(MAZE_LENGTH, MAZE_LENGTH, NUM_EXITS)
+COMPLEXITY = 0.5  # how interconnected the maze is
+exits, maze = generate_maze(MAZE_LENGTH, MAZE_LENGTH, NUM_EXITS, COMPLEXITY)
 
 while exits == []:
     exits, maze = generate_maze(MAZE_LENGTH, MAZE_LENGTH, NUM_EXITS)
 
 # 2) establish number of ants, iterations, and other parameters
-NUM_ANTS = 100
-NUM_ITERATIONS = 100
-PHEROMONE_STRENGTH = 1.0
+NUM_ANTS = 10
+NUM_ITERATIONS = 20
+PHEROMONE_STRENGTH = 1
 EVAPORATION_RATE = 0.05
 
 # 3) run ACO algorithm on maze
-
 start_time = time.perf_counter()  # timer start
 best_path, pheromone_layer = ACO(
     NUM_ANTS,
@@ -48,8 +48,8 @@ print("*********************************************")
 print("OG maze:")
 print_maze(maze)
 print("*********************************************")
-print("Best path:")
-print_maze_with_path(maze, best_path)
-print("*********************************************")
 print("Pheromone layer:")
 print_maze(pheromone_layer)
+print("*********************************************")
+print("Best path:")
+print_maze_with_path(maze, best_path)
