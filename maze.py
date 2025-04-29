@@ -1,16 +1,17 @@
 """
-This file contains functions related to the maze generation and view. Note that since maze generation
-was not the goal of this project, we are using code that is not ours.
+This file contains functions related to the maze generation and view. Note
+that since maze generation was not the goal of this project, we are using
+code that is not ours.
 """
 
 import random
 
 
-# treat maze as matrix
-# TODO: add more dead ends
 def generate_maze(rows, cols, num_exits=2):
     """
     Randomly generates a maze of a specified size and with the specified number of exits.
+    The maze is treated as a matrix of cells, where -1 indicates a wall and 0 indicates
+    a valid path.
 
     Args:
         rows (int): Number of rows in the maze
@@ -74,7 +75,7 @@ def print_maze(maze):
 
     Args:
         maze (list): 2D list of ints representing the maze, where -1 indicates
-        a wall and 0 (or numbers for pheromones) indicates a valid path.
+                     a wall and 0 (or numbers for pheromones) indicates a valid path.
     """
     BLACK = "\033[1;30m"
     RED = "\033[91m"

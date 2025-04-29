@@ -12,15 +12,16 @@ def ACO(
     """
     Our implementation of the Ant Colony Optimization algorithm for maze solving.
     The algorithm simulates a number of ants exploring the maze, depositing pheromones
-    on the successful paths they take. At the end of the simulation, the best path (with the strongest pheromones)
-    is returned.
+    on the successful paths they take. At the end of the simulation, the best path
+    (with the strongest pheromones) is returned.
 
     Args:
         num_ants (int): Number of ants to simulate.
         num_iterations (int): Number of iterations to run the simulation.
         maze (list): 2D list of ints representing the maze, where -1 indicates
                      a wall and 0 indicates a valid path.
-        exits (list): List of tuples representing the coordinates of the start index and end index, respectively.
+        exits (list): List of tuples representing the coordinates of the start index
+                      and end index, respectively.
         pheromone_strength (float): Amount of pheromone to deposit on the path.
         evaporation_rate (float): Rate at which pheromone evaporates.
 

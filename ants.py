@@ -15,7 +15,7 @@ def find_probability(pheromone_layer, neighbors):
         probabilities (list of float): Probabilities of moving to each neighboring cell.
     """
     # reads pheromones of neighboring cells
-    pheromones = [pheromone_layer[r][c] + 1e-6 for r, c in neighbors]
+    pheromones = [pheromone_layer[row][col] + 1e-6 for row, col in neighbors]
 
     # normalizes pheromones
     total = sum(pheromones)
@@ -25,14 +25,17 @@ def find_probability(pheromone_layer, neighbors):
     return probabilities
 
 
-def get_neighbors(maze, position):
+def get_neighbors(maze, position, path):
     """
-    Finds the neighboring cells of a given position in the maze.
+    Finds the neighboring path cells of a given position in the maze. If a cell
+    has already been visited, it is not considered a neighbor. This prevents
+    backtracking or ants looping its already traversed path.
 
     Args:
         maze (list): 2D list of ints representing the maze, where -1 indicates
                      a wall and 0 indicates a valid path.
         position (tuple): The current position in the maze (row, col).
+        path (list): The current path taken by the ant.
 
     Returns:
         neighbors (list): A list of tuples representing the coordinates of the
@@ -49,7 +52,7 @@ def get_neighbors(maze, position):
 
         # check if new pos is within path bounds
         if 0 <= new_r < len(maze) and 0 <= new_c < len(maze[0]):
-            if maze[new_r][new_c] != -1:
+            if maze[new_r][new_c] != -1 and (new_r, new_c) not in path:
                 neighbors.append((new_r, new_c))
     return neighbors
 
@@ -80,10 +83,11 @@ def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
     for _ in range(max_steps):
         if curr_position == end:
             break
-        neighbors = get_neighbors(maze, curr_position)
+        neighbors = get_neighbors(maze, curr_position, path)
         if not neighbors or (
             len(neighbors) == 1 and neighbors[0] in path
-        ):  # if no neighbors
+        ):  # if no neighbors or neighbor is already in path
+            # ant is stuck, return None
             return None
 
         # finds probs of moving to a cell, and chooses next move
