@@ -170,6 +170,25 @@ the pheromones from overwhelming the algorithm. Algorithms like ACO require a
 lot of experimentation and parameter tuning to achieve a well-performing
 algorithm.
 
+## Results
+
+The following visualizations show the output of the ACO algorithm on a
+randomly-generated maze.
+
+The initial maze is generated with "0" representing valid path cells:
+
+<img src="media/original_graph.jpg" alt="ACO original graph" width="200"/>
+
+The maze is solved with the ACO algorithm, and the best path found after all
+iterations is highlighted in red:
+
+<img src="media/best_path.jpg" alt="ACO graph with best path highlighted" width="200"/>
+
+The pheromone layer is visualized, with higher numbers representing more
+pheromones on the cell:
+
+<img src="media/pheromone_layer.jpg" alt="ACO graph with pheromone layer" width="200"/>
+
 ## Applications of ACO in other contexts
 
 ACO is generally good for tackling non-linear, complex problems that are
@@ -329,13 +348,11 @@ and refactoring the heuristics to incorporate the reward system.
 <!--
 Things to add:
 - 2 diagrams in the for "solving YOUR problem"
-- visualization of results provided in some format
 - describe what the results mean (analysis), like with performance metrics and graphs
   - run like 10 times, see how many work
   - runtime metrics (bc ACO is computationally expensive)
 - write more in depth about the two other applications of ACO
 - analysis of comparison with other heuristics? basically add some heuristic examples (A* and uhhh)
-- docstring for print_maze_path()
 - make graphs to show results
 - test changing the heuristic
 -->
