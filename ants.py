@@ -3,7 +3,7 @@
 import random
 
 
-def find_probability(pheromone_layer, neighbors):
+def find_probability(pheromone_layer, neighbors, pheromone_strength):
     """
     Finds the probability of moving to each neighboring cell based on pheromone levels.
 
@@ -15,7 +15,7 @@ def find_probability(pheromone_layer, neighbors):
         probabilities (list of float): Probabilities of moving to each neighboring cell.
     """
     # reads pheromones of neighboring cells
-    pheromones = [pheromone_layer[row][col] + 1e-6 for row, col in neighbors]
+    pheromones = [pheromone_layer[row][col] + pheromone_strength / 10 for row, col in neighbors]
 
     # normalizes pheromones
     total = sum(pheromones)
@@ -57,7 +57,7 @@ def get_neighbors(maze, position, path):
     return neighbors
 
 
-def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
+def simulate_ant(maze, pheromone_layer, start, end, pheromone_strength, max_steps=100):
     """
     Simulates the ant finding the path in the maze. Does not backtrack. If the ant
     reaches a dead end, or max number of steps, then simulation ends.
@@ -91,7 +91,7 @@ def simulate_ant(maze, pheromone_layer, start, end, max_steps=100):
             return None
 
         # finds probs of moving to a cell, and chooses next move
-        probabilities = find_probability(pheromone_layer, neighbors)
+        probabilities = find_probability(pheromone_layer, neighbors, pheromone_strength)
         curr_position = random.choices(neighbors, weights=probabilities)[0]
         path.append(curr_position)
     return path
