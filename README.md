@@ -355,7 +355,7 @@ list of movements (up, down, left, right). The population starts off with a
 random set of randomly-generated solutions. With each iteration, the algorithm
 evaluates the fitness of each solution, which depends on whether the path
 reaches the exit, and if so, the length of the path taken to reach the exit. The
-algorithm then selects the best solutions to create offspring via crossover [6].
+algorithm then selects the best solutions to create offspring via crossover [10].
 
 There are a few similarities between ACO and GA:
 
@@ -421,9 +421,6 @@ and refactoring the heuristics to incorporate the reward system.
    Management.” Department of Geology, Anna University, Chennai 600025, India,
    27 April 2023, https://doi.org/10.3390/w15091712.
 6. "A* search algorithm." https://en.wikipedia.org/wiki/A*_search_algorithm.
-6. Talha, Muhammad. Maze Solver (Genetic Algorithm).” Medium, Medium, 2 Apr.
-   2023,
-   https://medium.com/@muhammadtalha1735164/maze-solver-genetic-algorithm-2bfca68897.
 7. Shmygelska, Alena, and Holger H Hoos. "An ant colony optimisation algorithm
    for the 2D and 3D hydrophobic polar protein folding problem." BMC
    Bioinformatics, https://pmc.ncbi.nlm.nih.gov/articles/PMC555464/.
@@ -432,6 +429,9 @@ and refactoring the heuristics to incorporate the reward system.
 9. Kumar, D Nagesh & Janga Reddy, M. (2006). Ant Colony Optimization for Multi-Purpose Reservoir
    Operation. Water Resources Management. 20. 10.1007/s11269-005-9012-0.  
    https://www.researchgate.net/publication/28600558_Ant_Colony_Optimization_for_Multi-Purpose_Reservoir_Operation 
+10. Talha, Muhammad. Maze Solver (Genetic Algorithm).” Medium, Medium, 2 Apr.
+   2023,
+   https://medium.com/@muhammadtalha1735164/maze-solver-genetic-algorithm-2bfca68897.
 
 <!--
 Things to add:
