@@ -273,15 +273,29 @@ edges are the paths between the cities. Because the TSP is a well-known NP-hard
 problem that can easily be represented as a graph, ACO is a great method to use
 for solving it [2].
 
+ACO in this context would start the same way as it does with our algorithm,
+placing all the ants at a starting point. Then, each ant will choose to move to
+a specific city based on a probabilistic function involving pheromone strength
+and heuristic information on how 'good' a point is. Pheromones on the edges are
+updated based on how good the solution is from the ant that traversed that edge.
+When a satisfactory solution is found or the exit condition is met, the 
+algorithm terminates and returns the best solution found [3].
+
 ### Protein Folding
 
 Another application of ACO is protein folding, which is a known NP-hard problem
 within biology. In this case, the problem is to predict a protein's folded
-structure based on its amino acid sequence [3]. What makes ACO effective for
+structure based on its amino acid sequence [4]. What makes ACO effective for
 this application is that it has been successfully applied to other combinatorial
 problems [7]. The working implementation relies on multiple initial folding
 points to converge to a set of potential low-energy configurations, which is
 precisely how ACO works with deploying multiple ants per iteration.
+
+The problem can be represented as a graph, with the ants walking on the graphs to
+build a solution. At each step, the ants compute the possible moves it can make
+and chooses the best one based on some probability. At the beginning, the
+pheromones on the graph are initialized all to one small, constant value. As the
+ants create valid solutions, the pheromone levels are updated as they go [8].
 
 ### Reservoir Optimization
 
@@ -291,8 +305,19 @@ from inflow and demand. Because this is such a complex problem that involves
 many constraints and dynamic parts, ACO is a good method to solve it. However,
 as the article "Applications of Ant Colony Optimization" states, one of the main
 issues with ACO that is highlighted by the reservoir optimization problem is its
-large runtime [4]. Various adaptations of the conventional ACO algorithm (such
+large runtime [5]. Various adaptations of the conventional ACO algorithm (such
 as the max–min ant system) have been explored to curb this issue.
+
+The problem is represented as a graph for the ants to traverse easily since this
+representation helps with the ability to build solutions as they go. Ants use
+transition rules to move from one state to the next, based on a probabilistic
+function. The heuristic function gives context to constraints and affect to how
+the ant moves. In the research paper 'Ant Colony Optimization for Multi-Purpose
+Reservoir Operation,' they note that pheromones can be updated either locally 
+(ants drop pheromones as they go) or globally (pheromones update after all ants
+complete their rounds), though in their specific tests they found that globally
+worked better [9]. As seen in many ACO applications, the traversal continues
+until ants have found a solution or the termination condition is met.
 
 ## Comparison to Other Maze-Solving Algorithms
 
@@ -302,7 +327,7 @@ A\* algorithm is a greedy algorithm that finds the shortest path from a starting
 node to all other nodes in a graph. It does this by maintaining a priority queue
 of nodes to explore. At each step, it selects the node with the best score,
 which is a combination of having a low cost and an estimated cost of the
-cheapest path from n to the goal [5].
+cheapest path from n to the goal [6].
 
 A\* algorithm:
 
@@ -385,21 +410,28 @@ and refactoring the heuristics to incorporate the reward system.
 2. May, Bronwen, et al. "Ant Colony Optimization: An Advanced Approach to the
    Traveling Salesman Problem." Stanford University,
    https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://cap.stanford.edu/profiles/cwmd%3Ffid%3D301672%26cwmId%3D10839%23:~:text%3DThe%2520Ant%2520Colony%2520Optimization%2520Algorithm,cost%2520path%2520through%2520a%2520graph.&ved=2ahUKEwj4iM-exfiMAxXuvokEHX2JFeAQFnoECBcQAw&usg=AOvVaw13UjzGvWwFw_3UKssVfxaX.
-3. Stutzle, Thomas, Manuel Lopez-Ibanez, and Marco Dorigo. “A Concise Overview
+3. V. Murugananthan, et al. Traveling Salesman Problem with Ant Colony Optimization. July 2023,
+   https://doi.org/10.1109/icecaa58104.2023.10212262.
+4. Stutzle, Thomas, Manuel Lopez-Ibanez, and Marco Dorigo. “A Concise Overview
    of Applications of Ant Colony Optimization.” IRIDIA, CoDE, Universite Libre
    de Bruxelles (ULB), Brussels, Belgium,
    https://lopez-ibanez.eu/doc/StuLopDor2011eorms.pdf.
-4. Bhavya, Ravinder, and Lakshmanan Elango. “Ant-Inspired Metaheuristic
+5. Bhavya, Ravinder, and Lakshmanan Elango. “Ant-Inspired Metaheuristic
    Algorithms for Combinatorial Optimization Problems in Water Resources
    Management.” Department of Geology, Anna University, Chennai 600025, India,
    27 April 2023, https://doi.org/10.3390/w15091712.
-5. "A* search algorithm." https://en.wikipedia.org/wiki/A*\_search_algorithm.
+6. "A* search algorithm." https://en.wikipedia.org/wiki/A*_search_algorithm.
 6. Talha, Muhammad. Maze Solver (Genetic Algorithm).” Medium, Medium, 2 Apr.
    2023,
    https://medium.com/@muhammadtalha1735164/maze-solver-genetic-algorithm-2bfca68897.
 7. Shmygelska, Alena, and Holger H Hoos. "An ant colony optimisation algorithm
    for the 2D and 3D hydrophobic polar protein folding problem." BMC
    Bioinformatics, https://pmc.ncbi.nlm.nih.gov/articles/PMC555464/.
+8. Ant Colony System Approach for Protein Folding | IEEE Conference Publication | IEEE Xplore,
+   ieeexplore.ieee.org/document/4747347/. Accessed 30 Apr. 2025.
+9. Kumar, D Nagesh & Janga Reddy, M. (2006). Ant Colony Optimization for Multi-Purpose Reservoir
+   Operation. Water Resources Management. 20. 10.1007/s11269-005-9012-0.  
+   https://www.researchgate.net/publication/28600558_Ant_Colony_Optimization_for_Multi-Purpose_Reservoir_Operation 
 
 <!--
 Things to add:
