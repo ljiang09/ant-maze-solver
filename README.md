@@ -245,24 +245,29 @@ as the max–min ant system) have been explored to curb this issue.
 
 ## Comparison to Other Maze-Solving Algorithms
 
-### ACO vs. Dijkstra's (Greedy) Algorithm
+### ACO vs. A\* (Greedy + Heuristic) Algorithm
 
-Dijkstra's algorithm is a greedy algorithm that guarantees finding the shortest
-path from a starting node to all other nodes in a graph. It does this by
-maintaining a priority queue of nodes to explore, and at each step, it selects
-the node with the lowest cost to explore next [5].
+A\* algorithm is a greedy algorithm that finds the shortest path from a starting
+node to all other nodes in a graph. It does this by maintaining a priority queue
+of nodes to explore. At each step, it selects the node with the best score,
+which is a combination of having a low cost and an estimated cost of the
+cheapest path from n to the goal [5].
 
-Dijkstra's algorithm:
+A\* algorithm:
 
 - Simple to understand and implement
-- Works well on simple, straightforward graphs
-- Extremely space-inefficient, as it finds and stores the shortest paths from
-  the starting node to _every_ node in the graph
+- Works well on simple, straightforward graphs where paths tend to lead towards
+  the destination (no wind-y loopy paths). Thus, its heuristic is not super
+  intuitive for applying to mazes
+- Requires a knowledge of where the endpoint is, which isn't available in this
+  maze solving problem
 
 ACO:
 
 - Can handle complex sets of objectives and constraints
 - Great for handling large and complex solution spaces
+- Good for problems where the direction / general position of the end goal is
+  unknown (such as this maze solving problem)
 - Requires a lot of experimental parameter tuning, which is time-consuming and
   difficult to get right
 - Can be computationally expensive and slow to converge
@@ -337,7 +342,7 @@ and refactoring the heuristics to incorporate the reward system.
    Algorithms for Combinatorial Optimization Problems in Water Resources
    Management.” Department of Geology, Anna University, Chennai 600025, India,
    27 April 2023, https://doi.org/10.3390/w15091712.
-5. "Dijkstra's algorithm." https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm.
+5. "A* search algorithm." https://en.wikipedia.org/wiki/A*\_search_algorithm.
 6. Talha, Muhammad. Maze Solver (Genetic Algorithm).” Medium, Medium, 2 Apr.
    2023,
    https://medium.com/@muhammadtalha1735164/maze-solver-genetic-algorithm-2bfca68897.
@@ -352,7 +357,6 @@ Things to add:
   - run like 10 times, see how many work
   - runtime metrics (bc ACO is computationally expensive)
 - write more in depth about the two other applications of ACO
-- analysis of comparison with other heuristics? basically add some heuristic examples (A* and uhhh)
 - make graphs to show results
 - test changing the heuristic
 -->
