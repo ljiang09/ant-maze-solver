@@ -86,7 +86,36 @@ def sweep_num_iterations(start, end, step, num_iterations=20):
     plt.ylabel('Best number of iterations to converge')
     plt.show()
 
-sweep_num_iterations(50, 200, 10)
-
 
 # evaporation_rate
+def sweep_evap_rate(start, end, step, num_iterations=20):
+    avg = []
+
+    custom_range = range(int(start*100), int(end*100) + 1, int(step*100))
+
+    for rate in custom_range:
+        curr_iterations = []
+        curr_maze = copy.deepcopy(maze)
+
+        print(f"Running ACO with {rate/100} evap rate...")
+
+        for _ in range(num_iterations):
+            _, best_path_iteration, _ = ACO(
+                NUM_ANTS,
+                NUM_ITERATIONS,
+                curr_maze,
+                exits,
+                pheromone_strength=PHEROMONE_STRENGTH,
+                evaporation_rate=rate/100,
+            )
+            curr_iterations.append(best_path_iteration)
+        
+        avg.append(sum(curr_iterations) / len(curr_iterations))
+    
+    plt.figure()
+    plt.plot([x/100 for x in custom_range], avg)
+    plt.xlabel('Evaporation rate')
+    plt.ylabel('Average number of iterations to converge')
+    plt.show()
+
+sweep_evap_rate(0.01, 0.1, 0.01)

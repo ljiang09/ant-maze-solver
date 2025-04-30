@@ -207,7 +207,7 @@ pheromones on the cell:
 Due to the nature of the ACO algorithm, parameter tuning is a very important
 part of creating a functional algorithm. We ran a few parameter sweeps to see
 how parameters affected the output of the algorithm. For each sweep, we take the
-average and best results out of 20 attempts.
+average results out of 20 attempts.
 
 The following sweeps are run on this specific maze generation:
 
@@ -216,8 +216,6 @@ The following sweeps are run on this specific maze generation:
 #### Number of Ants
 
 <img src="media/num_ants_sweep_avg.jpg" alt="plot of avg results for num_ants sweep" width="400"/>
-
-<img src="media/num_ants_sweep_best.jpg" alt="plot of best results for num_ants sweep" width="400"/>
 
 Generally, the more ants there are, the better the algorithm performs on
 average. Due to the randomness of the algorithm, the trend isn't continuously
@@ -233,13 +231,23 @@ before termination.
 <img src="media/num_its_sweep_1.jpg" alt="plot for num iterations sweep" width="400"/>
 <img src="media/num_its_sweep_2.jpg" alt="plot for num iterations sweep" width="400"/>
 <img src="media/num_its_sweep_3.jpg" alt="plot for num iterations sweep" width="400"/>
-<img src="media/num_its_sweep_4.jpg" alt="plot for num iterations sweep" width="400"/>
 
 Generally, it doesn't seem like the number of iterations has a strong
 correlation with the performance of the algorithm. We tried a much larger range
 to sweep, from 50 - 200, but again, there was not a super strong pattern.
 
 <img src="media/num_its_sweep_5.jpg" alt="plot for num iterations sweep" width="400"/>
+
+#### Evaporation Rate
+
+The last parameter sweep we ran was for the evaporation rate.
+
+<img src="media/evap_rate_sweep_1.jpg" alt="plot for evap rate sweep" width="400"/>
+<img src="media/evap_rate_sweep_2.jpg" alt="plot for evap rate sweep" width="400"/>
+
+Again, the results are quite random and don't show a strong correlation with the
+evaporation rate. If a correlation were to be determined, it seems there is a
+very general downward trend as the evaporation rate increases.
 
 ## Applications of ACO in other contexts
 
