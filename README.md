@@ -86,6 +86,10 @@ If you have Python installed, you should be able to run the code.
 
 3. Return the best path found.
 
+This pseudocode is represented in the following diagram:
+
+<img src="media/flow.png" alt="flow" width="250"/>
+
 ### Parameters and Their Effects
 
 As with all heuristic algorithms, Ant Colony Optimization has parameters that
