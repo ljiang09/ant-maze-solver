@@ -51,6 +51,8 @@ def ACO(
                 if path[-1] == end and (not best_path or len(path) < len(best_path)):
                     best_path = path
                     best_path_iteration = i+1
+                    # double down on a successful path, simulating the ant "returning home"
+                    state.add_pheromone(pheromone_layer, path, pheromone_strength)
 
         state.evaporate_pheromone(pheromone_layer, evaporation_rate)
 
