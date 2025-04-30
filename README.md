@@ -223,6 +223,24 @@ Generally, the more ants there are, the better the algorithm performs on
 average. Due to the randomness of the algorithm, the trend isn't continuously
 downward and some spikes occur.
 
+#### Number of Iterations Before Termination
+
+We tried running the same parameter sweep a few times as the plot seemed quite
+random and uncorrelated with the number of iterations. Note that the x-axis
+should be multiplied by 10 to get the actual number of iterations that were run
+before termination.
+
+<img src="media/num_its_sweep_1.jpg" alt="plot for num iterations sweep" width="400"/>
+<img src="media/num_its_sweep_2.jpg" alt="plot for num iterations sweep" width="400"/>
+<img src="media/num_its_sweep_3.jpg" alt="plot for num iterations sweep" width="400"/>
+<img src="media/num_its_sweep_4.jpg" alt="plot for num iterations sweep" width="400"/>
+
+Generally, it doesn't seem like the number of iterations has a strong
+correlation with the performance of the algorithm. We tried a much larger range
+to sweep, from 50 - 200, but again, there was not a super strong pattern.
+
+<img src="media/num_its_sweep_5.jpg" alt="plot for num iterations sweep" width="400"/>
+
 ## Applications of ACO in other contexts
 
 ACO is generally good for tackling non-linear, complex problems that are

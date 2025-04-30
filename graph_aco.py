@@ -51,7 +51,42 @@ def sweep_num_ants(start, end, step, num_iterations=20):
     plt.ylabel('Best number of iterations to converge')
     plt.show()
 
-sweep_num_ants(5, 15, 1)
-
 # num_iterations
+def sweep_num_iterations(start, end, step, num_iterations=20):
+    avg = []
+    best = []
+
+    for num_its in range(start, end + 1, step):
+        curr_iterations = []
+        curr_maze = copy.deepcopy(maze)
+
+        print(f"Running ACO with {num_its} iterations...")
+
+        for _ in range(num_iterations):
+            _, best_path_iteration, _ = ACO(
+                NUM_ANTS,
+                num_its,
+                curr_maze,
+                exits,
+                pheromone_strength=PHEROMONE_STRENGTH,
+                evaporation_rate=EVAPORATION_RATE,
+            )
+            curr_iterations.append(best_path_iteration)
+        
+        avg.append(sum(curr_iterations) / len(curr_iterations))
+        best.append(min(curr_iterations))
+    
+    plt.figure(1)
+    plt.plot(avg)
+    plt.xlabel('Number of Iterations Before Termination x10')
+    plt.ylabel('Average number of iterations to converge')
+    plt.figure(2)
+    plt.plot(best)
+    plt.xlabel('Number of Iterations Before Termination x10')
+    plt.ylabel('Best number of iterations to converge')
+    plt.show()
+
+sweep_num_iterations(50, 200, 10)
+
+
 # evaporation_rate
