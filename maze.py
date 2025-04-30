@@ -49,8 +49,8 @@ def generate_maze(rows, cols, num_exits=1, complexity=0.2):
 
     # Generate exits on border
     exits = set()
-    border = [(0, x) for x in range(cols)] + [(rows - 1, x) for x in range(cols)] + \
-        [(x, 0) for x in range(1, rows)] + [(x, cols - 1) for x in range(rows)]
+    border = [(0, x) for x in range(1, cols)] + [(rows - 1, x) for x in range(cols)] + \
+        [(x, 0) for x in range(2, rows)] + [(x, cols - 1) for x in range(rows)]
 
     random.shuffle(border)
 
