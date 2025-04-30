@@ -163,6 +163,19 @@ to consider when tuning the ACO algorithm:
 - A maze with a single exit may converge more quickly, as the ants will have
   fewer paths to explore.
 
+**Maze complexity**
+
+- The amount of intersecting paths in the maze. This is a decimal from 0-1
+  specifying the probability that each "dead end" will turn into a path to
+  connect with another existing path.
+- A higher complexity will result in more intersecting paths, which may make it
+  easier for the ants to find a path to the exit as there are more valid paths.
+  With even higher complexity, there might be multiple equally valid "best
+  paths" (of the same length) to converge upon.
+- A lower complexity will result in less valid paths to optimize between. A
+  complexity of 0 is equivalent to no intersecting paths, meaning there is only
+  exactly one valid path from start to end.
+
 It's important to note that all of these parameters are interconnected, and
 tuning one will affect the others. For example, if the number of ants per
 iteration is increased, the evaporation rate may need to be increased to prevent
@@ -281,19 +294,6 @@ Some of the differences are:
 
 The current state of our ACO algorithm involves a few abstractions and
 limitations which could be improved upon in the future.
-
-### Maze Generation
-
-Because the focus of this project was on understanding and implementing the ACO
-algorithm, we did not spend much time on making robust maze generation code. In
-fact, it currently has a minor bug where it occasionally produces a maze with no
-entrance or exits.
-
-An improvement that can be made is to make the maze generation more controlled.
-Currently, we can only work with two parameters: the size of the maze and the
-number of exits. Refactoring the code to allow control over the "complexity" of
-the maze (such as how many intersecting paths there are) would help to better
-visualize how the algorithm is able to converge on optimal paths.
 
 ### Termination Condition
 
