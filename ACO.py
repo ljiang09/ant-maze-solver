@@ -29,14 +29,14 @@ def ACO(
         pheromone_layer (list): 2D list of floats representing the pheromone layer.
     """
     best_path = None
+    best_path_iteration = 0
     start = (1, 0)
     end = exits[0]
-    print(start)
 
     # create pheromone layer based on maze
     pheromone_layer = state.generate_pheromone_layer(maze)
 
-    for _ in range(num_iterations):
+    for i in range(num_iterations):
         paths = []
         for _ in range(num_ants):
             path = ants.simulate_ant(maze, pheromone_layer, start, end, pheromone_strength, max_steps=100)
@@ -47,11 +47,11 @@ def ACO(
         # this is so that we only reinforce successful paths
         for path in paths:
             if path:
-                if path[-1] == end:
-                    state.add_pheromone(pheromone_layer, path, pheromone_strength)
-                if not best_path or len(path) < len(best_path):
+                state.add_pheromone(pheromone_layer, path, pheromone_strength)
+                if path[-1] == end and (not best_path or len(path) < len(best_path)):
                     best_path = path
+                    best_path_iteration = i+1
 
         state.evaporate_pheromone(pheromone_layer, evaporation_rate)
 
-    return best_path, pheromone_layer
+    return best_path, best_path_iteration, pheromone_layer

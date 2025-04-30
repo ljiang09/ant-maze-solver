@@ -21,13 +21,13 @@ while exits == []:
 
 # 2) establish number of ants, iterations, and other parameters
 NUM_ANTS = 10
-NUM_ITERATIONS = 20
-PHEROMONE_STRENGTH = 1
+NUM_ITERATIONS = 50
+PHEROMONE_STRENGTH = 3
 EVAPORATION_RATE = 0.05
 
 # 3) run ACO algorithm on maze
 start_time = time.perf_counter()  # timer start
-best_path, pheromone_layer = ACO(
+best_path, best_path_iteration, pheromone_layer = ACO(
     NUM_ANTS,
     NUM_ITERATIONS,
     maze,
@@ -45,11 +45,13 @@ print(
 print("Best path found by ants:", best_path)
 print("Time taken to find best path:", end_time - start_time, "seconds")
 print("*********************************************")
-print("OG maze:")
-print_maze(maze)
-print("*********************************************")
+# print("OG maze:")
+# print_maze(maze)
+# print("*********************************************")
 print("Pheromone layer:")
 print_maze(pheromone_layer)
 print("*********************************************")
 print("Best path:")
 print_maze_with_path(maze, best_path)
+
+print("Best path iteration", best_path_iteration)

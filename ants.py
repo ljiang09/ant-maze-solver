@@ -88,7 +88,7 @@ def simulate_ant(maze, pheromone_layer, start, end, pheromone_strength, max_step
             len(neighbors) == 1 and neighbors[0] in path
         ):  # if no neighbors or neighbor is already in path
             # ant is stuck, return None
-            return None
+            return path
 
         # finds probs of moving to a cell, and chooses next move
         probabilities = find_probability(pheromone_layer, neighbors, pheromone_strength)
