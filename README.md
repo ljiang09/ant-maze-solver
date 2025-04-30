@@ -202,6 +202,27 @@ pheromones on the cell:
 
 <img src="media/pheromone_layer.jpg" alt="ACO graph with pheromone layer" width="200"/>
 
+### Parameter Sweeps
+
+Due to the nature of the ACO algorithm, parameter tuning is a very important
+part of creating a functional algorithm. We ran a few parameter sweeps to see
+how parameters affected the output of the algorithm. For each sweep, we take the
+average and best results out of 20 attempts.
+
+The following sweeps are run on this specific maze generation:
+
+<img src="media/sweep_maze.jpg" alt="maze to use for sweeping" width="400"/>
+
+#### Number of Ants
+
+<img src="media/num_ants_sweep_avg.jpg" alt="plot of avg results for num_ants sweep" width="400"/>
+
+<img src="media/num_ants_sweep_best.jpg" alt="plot of best results for num_ants sweep" width="400"/>
+
+Generally, the more ants there are, the better the algorithm performs on
+average. Due to the randomness of the algorithm, the trend isn't continuously
+downward and some spikes occur.
+
 ## Applications of ACO in other contexts
 
 ACO is generally good for tackling non-linear, complex problems that are
